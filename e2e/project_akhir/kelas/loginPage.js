@@ -1,0 +1,37 @@
+class loginPage{
+    visit()
+    {
+        cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    }
+    usernameTrue(username)
+    {
+        cy.get('[name="username"]').type(username)
+    }
+    passwordTrue(passwordTrue)
+    {
+        cy.get('[name="password"]').type(passwordTrue)
+    }
+    loginButton()
+    {
+        cy.get('.oxd-button').click()
+    }
+      forgotPage()
+    {
+        cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    }
+    alertError()
+    {
+        cy.get('.oxd-alert').should('be.visible')
+    }
+    intercept()
+    {
+        cy.intercept('GET','https://opensource-demo.orangehrmlive.com/web/index.php/core/i18n/messages').as('loginpage')
+    }
+    interceptWait()
+    {
+            cy.wait('@loginpage').then((intercept)=>{
+            expect(intercept.response.statusCode).to.equal(200)
+        })
+    }
+}
+export default new loginPage()
