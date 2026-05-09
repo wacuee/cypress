@@ -4,7 +4,7 @@ import afterLogin from "../project_akhir/kelas/afterLogin"
 import loginData from "../project_akhir/kelas/loginData.json"
 describe('Testing Login Feature',()=>
 {
-        it('LF-001 Login menggunakan Username & Password yang benar', ()=>
+        it('LF-01 Login menggunakan Username & Password yang benar', ()=>
     {
         loginPage.intercept()
         loginPage.visit()
@@ -14,7 +14,7 @@ describe('Testing Login Feature',()=>
         loginPage.loginButton()
         afterLogin.checkDashboard()
     })
-        it('LF-002 Periksa error credentials pop up', ()=>
+        it('LF-02 Periksa error credentials pop up', ()=>
     {
         loginPage.intercept()
         loginPage.visit()
@@ -25,7 +25,7 @@ describe('Testing Login Feature',()=>
         loginPage.alertError()
         
     })
-        it('LF-003 Login menggunakan Username & Password yang salah', ()=>
+        it('LF-03 Login menggunakan Username & Password yang salah', ()=>
     {
         loginPage.intercept()
         loginPage.visit()
@@ -36,7 +36,7 @@ describe('Testing Login Feature',()=>
         loginPage.alertError()
         afterLogin.checkDashboard()
     })
-        it('LF-004 Login menggunakan Username  yang salah', ()=>
+        it('LF-04 Login menggunakan Username  yang salah', ()=>
     {
         loginPage.intercept()
         loginPage.visit()
@@ -47,7 +47,7 @@ describe('Testing Login Feature',()=>
         loginPage.alertError()
         afterLogin.checkDashboard()
     })
-        it('LF-005 Login menggunakan password  yang salah', ()=>
+        it('LF-05 Login menggunakan password  yang salah', ()=>
     {
         loginPage.intercept()
         loginPage.visit()
@@ -62,14 +62,14 @@ describe('Testing Login Feature',()=>
 })
 describe('Testing halaman Forgot Password',()=>
 {
-        it('FP-001 Buka halaman forgot your password', ()=>
+        it('FP-01 Buka halaman forgot your password', ()=>
     {
         forgotPasswordPage.intercept()
         forgotPasswordPage.visit()
         forgotPasswordPage.forgotPageCheck()
         forgotPasswordPage.interceptWait()
     })
-        it('FP-002 Kosongkan field lupa password lalu klik tombol Reset Password', ()=>
+        it('FP-02 Kosongkan field lupa password lalu klik tombol Reset Password', ()=>
     {
         forgotPasswordPage.intercept()
         forgotPasswordPage.visit()
@@ -78,7 +78,7 @@ describe('Testing halaman Forgot Password',()=>
         forgotPasswordPage.resetButton()
         forgotPasswordPage.requiredError()
     })
-        it('FP-003 Masukan Username yang akan direset passwordnya lalu tekan tombol reset button', ()=>
+        it('FP-03 Masukan Username yang akan direset passwordnya lalu tekan tombol reset button', ()=>
     {
         forgotPasswordPage.intercept()
         forgotPasswordPage.visit()
@@ -88,7 +88,7 @@ describe('Testing halaman Forgot Password',()=>
         forgotPasswordPage.resetButton()
         forgotPasswordPage.sendPasswordResetCheck()
     })
-        it('FP-004 Klik tombol cancel', ()=>
+        it('FP-04 Klik tombol cancel', ()=>
     {
         forgotPasswordPage.intercept()
         forgotPasswordPage.visit()
@@ -117,7 +117,7 @@ describe('Testing halaman Forgot Password',()=>
         loginPage.visit()
         loginPage.usernameTrue(loginData.usernameTrue)
         loginPage.passwordTrue(loginData.passwordTrue)
-        cy.intercept('GET','https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/dashboard/employees/action-summary').as('summaryProfile')
+        cy.intercept('GET','**/api/v2/dashboard/employees/action-summary').as('summaryProfile')
         loginPage.loginButton()
         cy.wait('@summaryProfile').then((intercept)=>{
             expect(intercept.response.statusCode).to.equal(200)
@@ -128,7 +128,20 @@ describe('Testing halaman Forgot Password',()=>
         cy.get(':nth-child(1) > .oxd-userdropdown-link').click()
         cy.wait('@about').its('response.statusCode').should('eq',200)
     })
-    it('LP-03 Login dengan Username & Password yang benar lalu ke halaman PIM, intercept API employees', ()=>
+        it('LP-03 Login menggunakan Username & Password yang benar lalu ke halaman dashboard kemudian cek semua elemen Oxd sheet', ()=>
+    {
+        loginPage.visit()
+        loginPage.usernameTrue(loginData.usernameTrue)
+        loginPage.passwordTrue(loginData.passwordTrue)
+        cy.intercept('GET','**/api/v2/dashboard/employees/action-summary').as('summaryProfile')
+        loginPage.loginButton()
+        cy.wait('@summaryProfile').then((intercept)=>{
+            expect(intercept.response.statusCode).to.equal(200)
+        })
+        afterLogin.checkDashboard()
+        afterLogin.dashboardItemsCheck()
+    })
+    it('LP-04 Login dengan Username & Password yang benar lalu ke halaman PIM, intercept API employees', ()=>
     {
         cy.intercept('GET','**/api/v2/pim/employees*').as('Pim')
         loginPage.visit()
@@ -142,4 +155,33 @@ describe('Testing halaman Forgot Password',()=>
         })
         afterLogin.checkEmployeePage()
     })
+    it('LP-05 Login dengan Username & Password yang benar lalu ke halaman Leave, intercept API employees', ()=>
+    {
+        cy.intercept('GET','**/api/v2/leave/leave-periods*').as('leave')
+        loginPage.visit()
+        loginPage.usernameTrue(loginData.usernameTrue)
+        loginPage.passwordTrue(loginData.passwordTrue)
+        loginPage.loginButton()
+        afterLogin.checkDashboard()
+        afterLogin.leavePage()
+        cy.wait('@leave').then((intercept)=>{
+            expect(intercept.response.statusCode).to.equal(200)
+        })
+        afterLogin.checkleavePage()
+    })
+    it('LP-06 Login dengan Username & Password yang benar lalu ke halaman Time, intercept API Timesheet', ()=>
+    {
+        cy.intercept('GET','**/api/v2/time/employees/timesheets/list*').as('time')
+        loginPage.visit()
+        loginPage.usernameTrue(loginData.usernameTrue)
+        loginPage.passwordTrue(loginData.passwordTrue)
+        loginPage.loginButton()
+        afterLogin.checkDashboard()
+        afterLogin.timePage()
+        cy.wait('@time').then((intercept)=>{
+            expect(intercept.response.statusCode).to.equal(200)
+        })
+        afterLogin.checkTimePage()
+    })
+
 })
