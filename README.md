@@ -1,1 +1,1 @@
-Cypress Sanbercode 2026
+# Automation testing project using Cypress for API and UI testing.
