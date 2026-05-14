@@ -8,7 +8,7 @@ This project is an automation testing for the OrangeHRM Login feature, forgot pa
 - Page Object Model (POM)
 
 ### Project Structure
-cypress/
+```cypress/
 ├── e2e/
 │ └── project_akhir/
       └── kelas/
@@ -17,7 +17,7 @@ cypress/
           └── loginData.json
           └── loginPage.js
       └── project_akhir.cy.js
-
+```
 ### Folder Description
 - e2e/: Contain test specifications
 - project_akhir/: Contain "kelas" folder for Page Object Model files & main cypress file in JS format that contain all of the tests
