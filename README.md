@@ -1,2 +1,25 @@
 # Automation testing project using Cypress for API and UI testing.
 ## Project Overview
+This project is an automation testing for the OrangeHRM Login feature, forgot password feature & Dashboard Validation, built using Cypress with Page Object Model (POM) architecture. One of the main objectives of this project is to implement API Intercept testing using Cypress intercept functionality. By intercepting API requests and responses, the project can validate response status codes.
+
+### Tech Stack
+- Cypress
+- Javascript
+- Page Object Model (POM)
+
+### Project Structure
+cypress/
+├── e2e/
+│ └── project_akhir/
+      └── kelas/
+          └── afterLogin.js
+          └── forgotPasswordPage.js
+          └── loginData.json
+          └── loginPage.js
+      └── project_akhir.cy.js
+
+### Folder Description
+- e2e/: Contain test specifications
+- project_akhir/: Contain "kelas" folder for Page Object Model files & main cypress file in JS format that contain all of the tests
+- projcet_akhir/kelas : Contain Page Object Files (UI Locator & Action asbtraction), also Test data in JSON Format
+
