@@ -11,15 +11,28 @@ This project is an automation testing for the OrangeHRM Login feature, forgot pa
 ```cypress/
 ├── e2e/
 │ └── project_akhir/
-      └── kelas/
-          └── afterLogin.js
-          └── forgotPasswordPage.js
-          └── loginData.json
-          └── loginPage.js
-      └── project_akhir.cy.js
+│     └── kelas/
+│         └── afterLogin.js
+│         └── forgotPasswordPage.js
+│         └── loginData.json
+│         └── loginPage.js
+│     └── project_akhir.cy.js
 ```
 ### Folder Description
 - e2e/: Contain test specifications
 - project_akhir/: Contain "kelas" folder for Page Object Model files & main cypress file in JS format that contain all of the tests
 - projcet_akhir/kelas : Contain Page Object Files (UI Locator & Action asbtraction), also Test data in JSON Format
 
+# Test Scenarios
+### Login Page functionals tests
+| Test cases | Description |
+|:----:|:----:|
+| LF-01 | Login with right Username & Password |
+| LF-03 | Login with wroing Username & Password yang |
+| LF-04 | Login with wrong Username   |
+| LF-05 | Login with wrong password  |
+
+### Login Page validation tests
+| Test cases | Description |
+|:----:|:----:|
+| LF-02 | Check for 'error credentials' Pop up |
