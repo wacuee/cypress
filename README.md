@@ -28,7 +28,7 @@ This project is an automation testing for the OrangeHRM Login feature, forgot pa
 | Test cases | Description |
 |:----:|:----:|
 | LF-01 | Login with right Username & Password |
-| LF-03 | Login with wroing Username & Password yang |
+| LF-03 | Login with wrong Username & Password |
 | LF-04 | Login with wrong Username   |
 | LF-05 | Login with wrong password  |
 
