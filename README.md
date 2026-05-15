@@ -24,7 +24,7 @@ This project is an automation testing for the OrangeHRM Login feature, forgot pa
 - projcet_akhir/kelas : Contain Page Object Files (UI Locator & Action asbtraction), also Test data in JSON Format
 
 # Test Scenarios
-### Login Page functionals tests
+### Login page functionals tests
 | Test cases | Description |
 |:----:|:----:|
 | LF-01 | Login with right Username & Password |
@@ -32,7 +32,16 @@ This project is an automation testing for the OrangeHRM Login feature, forgot pa
 | LF-04 | Login with wrong Username   |
 | LF-05 | Login with wrong password  |
 
-### Login Page validation tests
+### Login page validation tests
 | Test cases | Description |
 |:----:|:----:|
-| LF-02 | Check for 'error credentials' Pop up |
+| LF-02 | 'error credentials' Pop up should appear when inputing wrong Username & Password |
+
+### Forgot password page functionals tests
+| Test cases | Description |
+|:----:|:----:|
+| FP-01 | Visit forgot password page |
+| FP-02 | Leave the input field and then click Reset Password button |
+| FP-03 | Input username that will be reseted and then click  Reset Password Button |
+| FP-04 | Click Cancel button |
+
